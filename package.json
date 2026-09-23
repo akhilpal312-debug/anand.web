@@ -1,0 +1,14 @@
+{
+  "name": "anand-pal-personal-world",
+  "version": "1.0.0",
+  "description": "Anand Pal — Just Anand. Nothing Ordinary. Immersive 3D personal website.",
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 5173",
+    "dev:win": "python -m http.server 5173",
+    "build": "echo \"Static site — no build step required. Deploy ./ as-is to Vercel / Netlify / GitHub Pages.\"",
+    "preview": "python -m http.server 4173"
+  },
+  "keywords": ["personal-website", "three.js", "gsap", "immersive"],
+  "license": "MIT"
+}

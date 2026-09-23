@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Anand Pal — Personal World</title>
+<meta name="description" content="Welcome to Anand Pal's personal world. Just Anand. Nothing Ordinary. Explore moments, interests and ways to connect." />
+<meta name="theme-color" content="#04070f" />
+<meta property="og:title" content="Anand Pal — Personal World" />
+<meta property="og:description" content="Just Anand. Nothing Ordinary." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a1628'/%3E%3Ctext x='32' y='42' font-family='cursive' font-size='30' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="src/style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+}}
+</script>
+</head>
+<body>
+<div id="loader" role="status" aria-label="Loading"><div class="loader-inner">
+  <div class="loader-logo">Anand Pal</div><div class="loader-name">Personal World</div>
+  <div class="loader-bar"><span></span></div><div class="loader-pct">LOADING…</div>
+</div></div>
+
+<div id="cursor" aria-hidden="true"></div><div id="cursorRing" aria-hidden="true"></div>
+<canvas id="webgl" aria-hidden="true"></canvas>
+<div class="atmosphere" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home" aria-label="Anand Pal home">Anand Pal</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home" data-sec="home" class="active">Home</a>
+      <a href="#about" data-sec="about">About</a>
+      <a href="#interests" data-sec="interests">Interests</a>
+      <a href="#gallery" data-sec="gallery">Gallery</a>
+      <a href="#contact" data-sec="contact">Contact</a>
+    </nav>
+    <div class="nav-social">
+      <a class="icon-btn" data-ig href="https://www.instagram.com/itz_anand_0902/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.1a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4zm0 11a4.4 4.4 0 1 1 0-8.8 4.4 4.4 0 0 1 0 8.8zm6.9-11.4a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0z"/></svg></a>
+      <a class="icon-btn" data-tg href="https://t.me/Anandpal_yt" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 2.7 12.1c-.8.3-.8 1.4.1 1.6l4.7 1.5 1.8 5.6c.3.8 1.3.9 1.8.2l2.6-3.1 4.9 3.6c.6.4 1.5.1 1.7-.6l3.1-14.6c.2-1-.8-1.9-1.5-1.7zM8.6 13.2l9.1-7.1c.2-.1.4.1.2.3l-7.5 7.3-.3 3-1.5-3.5z"/></svg></a>
+      <a class="icon-btn" data-phone-card href="#" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M6.6 2.8c.6 0 2.1 2.9 2.3 3.5.2.7-.3 1.2-.9 1.7-.5.4-.8.8-.6 1.4.4 1.3 2.3 3.8 3.7 4.5.6.3 1.1.1 1.6-.4.5-.6 1-1 1.7-.8.6.2 3.4 1.9 3.4 2.5 0 1.6-1.7 2.5-3 2.5-3.9 0-10.4-6.9-11-11-.3-1.7.9-4.4 2.8-4.4z"/></svg></a>
+    </div>
+    <button id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div id="mobileMenu" aria-hidden="true"><nav aria-label="Mobile">
+  <a class="big" data-sec="home" href="#home">Home</a>
+  <a class="big" data-sec="about" href="#about">About</a>
+  <a class="big" data-sec="interests" href="#interests">Interests</a>
+  <a class="big" data-sec="gallery" href="#gallery">Gallery</a>
+  <a class="big" data-sec="contact" href="#contact">Contact</a>
+  <div class="mobile-social">
+    <a class="icon-btn" data-ig href="https://www.instagram.com/itz_anand_0902/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+    <a class="icon-btn" data-tg href="https://t.me/Anandpal_yt" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+  </div>
+</nav></div>
+
+<main>
+<!-- HERO -->
+<section id="home" style="scroll-margin-top:70px">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="welcome">Welcome to my world</div>
+      <h1 class="hero-title" aria-label="Anand Pal"><span class="stroke">ANAND</span><span class="fill">PAL</span></h1>
+      <p class="hero-tag">Just Anand. Nothing Ordinary.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#about">Explore More <span class="arr">→</span></a>
+        <a class="btn" data-ig href="https://www.instagram.com/itz_anand_0902/" target="_blank" rel="noopener">Follow Me</a>
+      </div>
+      <p class="hand" style="margin-top:18px;font-size:22px;transform:rotate(-2deg)">Good vibes only ☺ — that's me.</p>
+    </div>
+    <div class="hero-visual" aria-label="Anand Pal portrait composition">
+      <div class="portrait-stage" id="portraitStage">
+        <div class="portrait-glow"></div>
+        <div class="portrait-frame">
+          <div class="portrait-fallback" aria-hidden="true"><div class="mono">AP</div><p>Add <b>assets/images/anand-hero.jpg</b><br/>to show Anand's real photo here</p></div>
+          <img src="assets/images/anand-hero.jpg" alt="Anand Pal portrait" data-fallback onerror="this.style.display='none'" />
+        </div>
+        <div class="rock"></div>
+      </div>
+      <figure class="float-photo fp1"><img src="assets/images/gallery-1.jpg" alt="Mountain memory" data-fallback onerror="this.style.display='none'"/><div class="g-fallback" style="height:90px;border-radius:6px">Mountain<br/>mornings</div><figcaption>wander</figcaption></figure>
+      <figure class="float-photo fp2"><img src="assets/images/gallery-2.jpg" alt="Sunset memory" data-fallback onerror="this.style.display='none'"/><div class="g-fallback" style="height:70px;border-radius:6px">Golden hour</div><figcaption>sunset</figcaption></figure>
+      <figure class="float-photo fp3"><img src="assets/images/gallery-3.jpg" alt="Travel memory" data-fallback onerror="this.style.display='none'"/><div class="g-fallback" style="height:86px;border-radius:6px">New places</div><figcaption>explore</figcaption></figure>
+      <div class="float-cube fc1"></div><div class="float-cube fc2"></div>
+      <div class="hero-vibes">Good Vibes<br/>Only ☺</div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="mouse"></div><span>Scroll Down</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="eyebrow">About me</div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <div class="doodle" style="position:absolute;left:-56px;top:10px;transform:rotate(-12deg)">That's<br/>Me →</div>
+        <div class="polaroid">
+          <div class="ph"><div class="portrait-fallback" style="position:absolute;inset:0"><div class="mono" style="width:90px;height:90px;font-size:34px">AP</div></div><img src="assets/images/anand-about.jpg" alt="Anand Pal" data-fallback onerror="this.style.display='none'" /></div>
+          <div class="cap">Anand Pal ♛</div>
+        </div>
+        <span class="leaf" style="left:-14px;bottom:30px">🌿</span><span class="leaf" style="right:6px;top:-10px">🌿</span>
+      </div>
+      <div class="about-text">
+        <div class="eyebrow" style="margin-bottom:6px">About me</div>
+        <h2 class="title line">Hey, I'm <span class="accent">Anand Pal</span></h2>
+        <p class="line">I'm just a normal guy with big dreams, a positive mind and a love for the little things in life. I enjoy exploring new places, meeting new people and making the most out of every moment.</p>
+        <p class="line">Life's better when you stay real, keep smiling and keep going!</p>
+        <div class="signature line">Anand Pal</div>
+        <div class="chips line"><span class="chip">Friendly</span><span class="chip">Positive</span><span class="chip">Simple</span><span class="chip">Dreamer</span></div>
+      </div>
+      <aside class="info-card" aria-label="Personal facts">
+        <div class="info-row"><div class="info-ico">📍</div><div><b>From: India</b><span>Home & heart</span></div></div>
+        <div class="info-row"><div class="info-ico">🤝</div><div><b>Personality: Friendly</b><span>Simple & real</span></div></div>
+        <div class="info-row"><div class="info-ico">🤍</div><div><b>Love: Friends, Music, Travel, Food</b><span>Little joys</span></div></div>
+        <div class="info-row"><div class="info-ico">⭐</div><div><b>Goal: A Happy & Successful Life</b><span>Positive mindset</span></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests" style="scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="inter-head">
+      <div><div class="eyebrow">My interests</div><h2 class="title">Things I <span class="accent">Love</span></h2>
+      <p class="sub">These things make me happy, keep me motivated and add color to my life.</p>
+      <div style="margin-top:16px"><a class="btn" href="#gallery">View All <span class="arr">→</span></a></div></div>
+      <div class="hand" style="font-size:22px;opacity:.7">* tap a card — made for touch too</div>
+    </div>
+    <div class="cards">
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">🎧</div><h3>Music</h3><p>Good Music = Good Mood</p></article>
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">📷</div><h3>Photography</h3><p>Capture Beautiful Moments</p></article>
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">🏔️</div><h3>Travel</h3><p>Explore New Places</p></article>
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">🎮</div><h3>Gaming</h3><p>Play & Stay Relaxed</p></article>
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">📚</div><h3>Books</h3><p>Better Mind, Better Life</p></article>
+      <article class="card3d" tabindex="0"><span class="shine"></span><div class="emoji">🍕</div><h3>Food</h3><p>Good Food, Happy Soul</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="scroll-margin-top:60px">
+  <div class="wrap gallery-layout">
+    <div><div class="eyebrow">My gallery</div><h2 class="title">Moments I <span class="accent">Treasure</span></h2>
+      <p class="sub">Some random clicks, some special moments, all part of my story.</p>
+      <div style="margin-top:16px"><a class="btn" href="#contact">View Gallery <span class="arr">→</span></a></div>
+      <p class="hand" style="font-size:24px;margin-top:16px">Good vibes always ☺</p>
+    </div>
+    <div class="strip" aria-label="Photo strip">
+      <figure class="g-photo" data-speed="1.4"><div class="im"><div class="g-fallback">Mountain<br/>mornings</div><img src="assets/images/gallery-1.jpg" alt="Mountains" data-fallback onerror="this.style.display='none'"/></div><figcaption>morning light</figcaption></figure>
+      <figure class="g-photo" data-speed="1"><div class="im"><div class="g-fallback">Golden<br/>hour</div><img src="assets/images/gallery-3.jpg" alt="Sunset" data-fallback onerror="this.style.display='none'"/></div><figcaption>golden hour</figcaption></figure>
+      <figure class="g-photo" data-speed="0.6"><div class="im"><div class="g-fallback">City<br/>nights</div><img src="assets/images/gallery-2.jpg" alt="Night drive" data-fallback onerror="this.style.display='none'"/></div><figcaption>night drive</figcaption></figure>
+      <figure class="g-photo" data-speed="1.2"><div class="im"><div class="g-fallback">New<br/>places</div><img src="assets/images/gallery-4.jpg" alt="Travel" data-fallback onerror="this.style.display='none'"/></div><figcaption>wander</figcaption></figure>
+    </div>
+    <div><div class="collect">“Collect<br/>Moments<br/>Not Things”</div>
+      <svg class="mountains" width="180" height="60" viewBox="0 0 180 60" fill="none" stroke="#9ab3cf" stroke-width="1.4"><path d="M5 50 45 12l25 26 20-16 35 28"/><path d="M30 50l25-20 15 12"/><circle cx="140" cy="14" r="7"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="scroll-margin-top:60px">
+  <div class="wrap contact-grid">
+    <div class="contact-copy"><div class="eyebrow">Let's connect</div>
+      <h2 class="title line">Get In <span class="accent">Touch</span></h2>
+      <p class="sub line">Feel free to reach out. I'd love to hear from you!</p>
+      <p class="hand line" style="font-size:22px;margin-top:12px">no pressure — just say hi 👋</p>
+    </div>
+    <div class="contact-cards">
+      <a class="c-card c-ig" data-ig href="https://www.instagram.com/itz_anand_0902/" target="_blank" rel="noopener"><span class="c-ico ig"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.1a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4zm0 11a4.4 4.4 0 1 1 0-8.8 4.4 4.4 0 0 1 0 8.8zm6.9-11.4a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0z"/></svg></span><span><b data-ig-handle>@itz_anand_0902</b><span>Follow on Instagram</span></span></a>
+      <a class="c-card c-tg" data-tg href="https://t.me/Anandpal_yt" target="_blank" rel="noopener"><span class="c-ico tg"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 2.7 12.1c-.8.3-.8 1.4.1 1.6l4.7 1.5 1.8 5.6c.3.8 1.3.9 1.8.2l2.6-3.1 4.9 3.6c.6.4 1.5.1 1.7-.6l3.1-14.6c.2-1-.8-1.9-1.5-1.7zM8.6 13.2l9.1-7.1c.2-.1.4.1.2.3l-7.5 7.3-.3 3-1.5-3.5z"/></svg></span><span><b data-tg-handle>@Anandpal_yt</b><span>Join on Telegram</span></span></a>
+      <a class="c-card c-ph" data-phone-card href="#"><span class="c-ico ph"><svg viewBox="0 0 24 24"><path d="M6.6 2.8c.6 0 2.1 2.9 2.3 3.5.2.7-.3 1.2-.9 1.7-.5.4-.8.8-.6 1.4.4 1.3 2.3 3.8 3.7 4.5.6.3 1.1.1 1.6-.4.5-.6 1-1 1.7-.8.6.2 3.4 1.9 3.4 2.5 0 1.6-1.7 2.5-3 2.5-3.9 0-10.4-6.9-11-11-.3-1.7.9-4.4 2.8-4.4z"/></svg></span><span><b data-phone-label>Phone</b><span>Call / WhatsApp</span></span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="foot">
+  <div style="display:flex;align-items:center;gap:12px"><span class="brand">Anand Pal</span><small>Just Anand. Nothing Ordinary.</small></div>
+  <small>Made with ♥ for good people</small>
+  <div class="nav-social">
+    <a class="icon-btn" data-ig href="https://www.instagram.com/itz_anand_0902/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2z"/></svg></a>
+    <a class="icon-btn" data-tg href="https://t.me/Anandpal_yt" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 2.7 12.1c-.8.3-.8 1.4.1 1.6l4.7 1.5 1.8 5.6c.3.8 1.3.9 1.8.2l2.6-3.1 4.9 3.6c.6.4 1.5.1 1.7-.6l3.1-14.6c.2-1-.8-1.9-1.5-1.7z"/></svg></a>
+    <a class="icon-btn" data-phone-card href="#" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M6.6 2.8c.6 0 2.1 2.9 2.3 3.5.2.7-.3 1.2-.9 1.7-.5.4-.8.8-.6 1.4.4 1.3 2.3 3.8 3.7 4.5.6.3 1.1.1 1.6-.4.5-.6 1-1 1.7-.8.6.2 3.4 1.9 3.4 2.5 0 1.6-1.7 2.5-3 2.5-3.9 0-10.4-6.9-11-11-.3-1.7.9-4.4 2.8-4.4z"/></svg></a>
+  </div>
+</div></footer>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
